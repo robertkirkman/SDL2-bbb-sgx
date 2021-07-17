@@ -1,0 +1,612 @@
+/*
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2020 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+*/
+
+/* *INDENT-OFF* */
+
+#ifndef SDL_KMSDRM_LEGACY_MODULE
+#define SDL_KMSDRM_LEGACY_MODULE(modname)
+#endif
+
+#ifndef SDL_KMSDRM_LEGACY_SYM
+#define SDL_KMSDRM_LEGACY_SYM(rc,fn,params)
+#endif
+
+#ifndef SDL_KMSDRM_LEGACY_SYM_CONST
+#define SDL_KMSDRM_LEGACY_SYM_CONST(type, name)
+#endif
+
+
+SDL_KMSDRM_LEGACY_MODULE(LIBDRM)
+SDL_KMSDRM_LEGACY_SYM(void,drmModeFreeResources,(drmModeResPtr ptr))
+SDL_KMSDRM_LEGACY_SYM(void,drmModeFreeFB,(drmModeFBPtr ptr))
+SDL_KMSDRM_LEGACY_SYM(void,drmModeFreeCrtc,(drmModeCrtcPtr ptr))
+SDL_KMSDRM_LEGACY_SYM(void,drmModeFreeConnector,(drmModeConnectorPtr ptr))
+SDL_KMSDRM_LEGACY_SYM(void,drmModeFreeEncoder,(drmModeEncoderPtr ptr))
+SDL_KMSDRM_LEGACY_SYM(drmModeResPtr,drmModeGetResources,(int fd))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeAddFB2,(int fd, uint32_t width, uint32_t height,
+			 uint32_t pixel_format, const uint32_t bo_handles[4],
+			 const uint32_t pitches[4], const uint32_t offsets[4],
+			 uint32_t *buf_id, uint32_t flags))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeRmFB,(int fd, uint32_t bufferId))
+SDL_KMSDRM_LEGACY_SYM(drmModeFBPtr,drmModeGetFB,(int fd, uint32_t buf))
+SDL_KMSDRM_LEGACY_SYM(drmModeCrtcPtr,drmModeGetCrtc,(int fd, uint32_t crtcId))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeSetCrtc,(int fd, uint32_t crtcId, uint32_t bufferId,
+                                   uint32_t x, uint32_t y, uint32_t *connectors, int count,
+                                   drmModeModeInfoPtr mode))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeSetCursor,(int fd, uint32_t crtcId, uint32_t bo_handle,
+                                     uint32_t width, uint32_t height))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeSetCursor2,(int fd, uint32_t crtcId, uint32_t bo_handle,
+                                      uint32_t width, uint32_t height,
+                                      int32_t hot_x, int32_t hot_y))
+SDL_KMSDRM_LEGACY_SYM(int,drmModeMoveCursor,(int fd, uint32_t crtcId, int x, int y))
+SDL_KMSDRM_LEGACY_SYM(drmModeEncoderPtr,drmModeGetEncoder,(int fd, uint32_t encoder_id))
+SDL_KMSDRM_LEGACY_SYM(drmModeConnectorPtr,drmModeGetConnector,(int fd, uint32_t connector_id))
+SDL_KMSDRM_LEGACY_SYM(int,drmHandleEvent,(int fd,drmEventContextPtr evctx))
+SDL_KMSDRM_LEGACY_SYM(int,drmModePageFlip,(int fd, uint32_t crtc_id, uint32_t fb_id,
+                                    uint32_t flags, void *user_data))
+
+
+SDL_KMSDRM_LEGACY_MODULE(GBM)
+SDL_KMSDRM_LEGACY_SYM(int,gbm_device_get_fd,(struct gbm_device *gbm))
+SDL_KMSDRM_LEGACY_SYM(int,gbm_device_is_format_supported,(struct gbm_device *gbm,
+                                                   uint32_t format, uint32_t usage))
+SDL_KMSDRM_LEGACY_SYM(void,gbm_device_destroy,(struct gbm_device *gbm))
+SDL_KMSDRM_LEGACY_SYM(struct gbm_device *,gbm_create_device,(int fd))
+SDL_KMSDRM_LEGACY_SYM(unsigned int,gbm_bo_get_width,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(unsigned int,gbm_bo_get_height,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(uint32_t,gbm_bo_get_stride,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(uint32_t,
+Skip to content
+GitLab
+
+    Menu 
+
+    Help
+
+    D drm
+    Project information
+    Repository
+    Issues 23
+    Merge requests 42
+    CI/CD
+    Deployments
+    Monitor
+    Packages & Registries
+    Analytics
+    Snippets
+
+    Mesa
+    drm
+    Repository
+
+    drm
+    xf86drmMode.h
+
+    Simon Ser's avatar
+    xf86drmMode: introduce drmModeGetPropertyType 
+
+Simon Ser authored 4 months ago
+6d821612
+xf86drmMode.h
+14.3 KB
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+
+/*  * \file xf86drmMode.h  * Header for DRM modesetting interface.  *  * \author Jakob Bornecrantz <wallbraker@gmail.com>  *  * \par Acknowledgements:  * Feb 2007, Dave Airlie <airlied@linux.ie>  */ /*  * Copyright (c) 2007-2008 Tungsten Graphics, Inc., Cedar Park, Texas.  * Copyright (c) 2007-2008 Dave Airlie <airlied@linux.ie>  * Copyright (c) 2007-2008 Jakob Bornecrantz <wallbraker@gmail.com>  *  * Permission is hereby granted, free of charge, to any person obtaining a  * copy of this software and associated documentation files (the "Software"),  * to deal in the Software without restriction, including without limitation  * the rights to use, copy, modify, merge, publish, distribute, sublicense,  * and/or sell copies of the Software, and to permit persons to whom the  * Software is furnished to do so, subject to the following conditions:  *  * The above copyright notice and this permission notice shall be included in  * all copies or substantial portions of the Software.  *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS  * IN THE SOFTWARE.  *  */ #ifndef _XF86DRMMODE_H_ #define _XF86DRMMODE_H_ #if defined(__cplusplus) extern "C" { #endif #include <drm.h> #include <drm_mode.h> #include <stddef.h> #include <stdint.h> /*  * This is the interface for modesetting for drm.  *  * It aims to provide a randr1.2 compatible interface for modesettings in the  * kernel, the interface is also meant to be used by libraries like EGL.  *  * More information can be found in randrproto.txt which can be found here:  * http://gitweb.freedesktop.org/?p=xorg/proto/randrproto.git  *  * There are some major differences to be noted. Unlike the randr1.2 proto you  * need to create the memory object of the framebuffer yourself with the ttm  * buffer object interface. This object needs to be pinned.  */ /*  * Feature defines  *  * Just because these are defined doesn't mean that the kernel  * can do that feature, its just for new code vs old libdrm.  */ #define DRM_MODE_FEATURE_KMS		1 #define DRM_MODE_FEATURE_DIRTYFB	1 typedef struct _drmModeRes { 	int count_fbs; 	uint32_t *fbs; 	int count_crtcs; 	uint32_t *crtcs; 	int count_connectors; 	uint32_t *connectors; 	int count_encoders; 	uint32_t *encoders; 	uint32_t min_width, max_width; 	uint32_t min_height, max_height; } drmModeRes, *drmModeResPtr; typedef struct _drmModeModeInfo { 	uint32_t clock; 	uint16_t hdisplay, hsync_start, hsync_end, htotal, hskew; 	uint16_t vdisplay, vsync_start, vsync_end, vtotal, vscan; 	uint32_t vrefresh; 	uint32_t flags; 	uint32_t type; 	char name[DRM_DISPLAY_MODE_LEN]; } drmModeModeInfo, *drmModeModeInfoPtr; typedef struct _drmModeFB { 	uint32_t fb_id; 	uint32_t width, height; 	uint32_t pitch; 	uint32_t bpp; 	uint32_t depth; 	/* driver specific handle */ 	uint32_t handle; } drmModeFB, *drmModeFBPtr; typedef struct _drmModeFB2 { 	uint32_t fb_id; 	uint32_t width, height; 	uint32_t pixel_format; /* fourcc code from drm_fourcc.h */ 	uint64_t modifier; /* applies to all buffers */ 	uint32_t flags; 	/* per-plane GEM handle; may be duplicate entries for multiple planes */ 	uint32_t handles[4]; 	uint32_t pitches[4]; /* bytes */ 	uint32_t offsets[4]; /* bytes */ } drmModeFB2, *drmModeFB2Ptr; typedef struct drm_clip_rect drmModeClip, *drmModeClipPtr; typedef struct _drmModePropertyBlob { 	uint32_t id; 	uint32_t length; 	void *data; } drmModePropertyBlobRes, *drmModePropertyBlobPtr; typedef struct _drmModeProperty { 	uint32_t prop_id; 	uint32_t flags; 	char name[DRM_PROP_NAME_LEN]; 	int count_values; 	uint64_t *values; /* store the blob lengths */ 	int count_enums; 	struct drm_mode_property_enum *enums; 	int count_blobs; 	uint32_t *blob_ids; /* store the blob IDs */ } drmModePropertyRes, *drmModePropertyPtr; static __inline int drm_property_type_is(drmModePropertyPtr property, 		uint32_t type) { 	/* instanceof for props.. handles extended type vs original types: */ 	if (property->flags & DRM_MODE_PROP_EXTENDED_TYPE) 		return (property->flags & DRM_MODE_PROP_EXTENDED_TYPE) == type; 	return property->flags & type; } static inline uint32_t drmModeGetPropertyType(const drmModePropertyRes *prop) { 	return prop->flags & (DRM_MODE_PROP_LEGACY_TYPE | DRM_MODE_PROP_EXTENDED_TYPE); } typedef struct _drmModeCrtc { 	uint32_t crtc_id; 	uint32_t buffer_id; /**< FB id to connect to 0 = disconnect */ 	uint32_t x, y; /**< Position on the framebuffer */ 	uint32_t width, height; 	int mode_valid; 	drmModeModeInfo mode; 	int gamma_size; /**< Number of gamma stops */ } drmModeCrtc, *drmModeCrtcPtr; typedef struct _drmModeEncoder { 	uint32_t encoder_id; 	uint32_t encoder_type; 	uint32_t crtc_id; 	uint32_t possible_crtcs; 	uint32_t possible_clones; } drmModeEncoder, *drmModeEncoderPtr; /**  * Describes the connector status.  *  * DRM_MODE_CONNECTED means that the connector has a sink plugged in.  * DRM_MODE_DISCONNECTED means the contrary. DRM_MODE_UNKNOWNCONNECTION is used  * when it could be either.  *  * User-space should first try to enable DRM_MODE_CONNECTED connectors and  * ignore other connectors. If there are no DRM_MODE_CONNECTED connectors,  * user-space should then try to probe and enable DRM_MODE_UNKNOWNCONNECTION  * connectors.  */ typedef enum { 	DRM_MODE_CONNECTED         = 1, 	DRM_MODE_DISCONNECTED      = 2, 	DRM_MODE_UNKNOWNCONNECTION = 3 } drmModeConnection; typedef enum { 	DRM_MODE_SUBPIXEL_UNKNOWN        = 1, 	DRM_MODE_SUBPIXEL_HORIZONTAL_RGB = 2, 	DRM_MODE_SUBPIXEL_HORIZONTAL_BGR = 3, 	DRM_MODE_SUBPIXEL_VERTICAL_RGB   = 4, 	DRM_MODE_SUBPIXEL_VERTICAL_BGR   = 5, 	DRM_MODE_SUBPIXEL_NONE           = 6 } drmModeSubPixel; typedef struct _drmModeConnector { 	uint32_t connector_id; 	uint32_t encoder_id; /**< Encoder currently connected to */ 	uint32_t connector_type; 	uint32_t connector_type_id; 	drmModeConnection connection; 	uint32_t mmWidth, mmHeight; /**< HxW in millimeters */ 	drmModeSubPixel subpixel; 	int count_modes; 	drmModeModeInfoPtr modes; 	int count_props; 	uint32_t *props; /**< List of property ids */ 	uint64_t *prop_values; /**< List of property values */ 	int count_encoders; 	uint32_t *encoders; /**< List of encoder ids */ } drmModeConnector, *drmModeConnectorPtr; #define DRM_PLANE_TYPE_OVERLAY 0 #define DRM_PLANE_TYPE_PRIMARY 1 #define DRM_PLANE_TYPE_CURSOR  2 typedef struct _drmModeObjectProperties { 	uint32_t count_props; 	uint32_t *props; 	uint64_t *prop_values; } drmModeObjectProperties, *drmModeObjectPropertiesPtr; typedef struct _drmModePlane { 	uint32_t count_formats; 	uint32_t *formats; 	uint32_t plane_id; 	uint32_t crtc_id; 	uint32_t fb_id; 	uint32_t crtc_x, crtc_y; 	uint32_t x, y; 	uint32_t possible_crtcs; 	uint32_t gamma_size; } drmModePlane, *drmModePlanePtr; typedef struct _drmModePlaneRes { 	uint32_t count_planes; 	uint32_t *planes; } drmModePlaneRes, *drmModePlaneResPtr; extern void drmModeFreeModeInfo( drmModeModeInfoPtr ptr ); extern void drmModeFreeResources( drmModeResPtr ptr ); extern void drmModeFreeFB( drmModeFBPtr ptr ); extern void drmModeFreeFB2( drmModeFB2Ptr ptr ); extern void drmModeFreeCrtc( drmModeCrtcPtr ptr ); extern void drmModeFreeConnector( drmModeConnectorPtr ptr ); extern void drmModeFreeEncoder( drmModeEncoderPtr ptr ); extern void drmModeFreePlane( drmModePlanePtr ptr ); extern void drmModeFreePlaneResources(drmModePlaneResPtr ptr); /**  * Check whether the DRM node supports Kernel Mode-Setting.  *  * Returns 1 if suitable for KMS, 0 otherwise.  */ extern int drmIsKMS(int fd); /**  * Retrieves all of the resources associated with a card.  */ extern drmModeResPtr drmModeGetResources(int fd); /*  * FrameBuffer manipulation.  */ /**  * Retrieve information about framebuffer bufferId  */ extern drmModeFBPtr drmModeGetFB(int fd, uint32_t bufferId); extern drmModeFB2Ptr drmModeGetFB2(int fd, uint32_t bufferId); /**  * Creates a new framebuffer with an buffer object as its scanout buffer.  */ extern int drmModeAddFB(int fd, uint32_t width, uint32_t height, uint8_t depth, 			uint8_t bpp, uint32_t pitch, uint32_t bo_handle, 			uint32_t *buf_id); /* ...with a specific pixel format */ extern int drmModeAddFB2(int fd, uint32_t width, uint32_t height, 			 uint32_t pixel_format, const uint32_t bo_handles[4], 			 const uint32_t pitches[4], const uint32_t offsets[4], 			 uint32_t *buf_id, uint32_t flags); /* ...with format modifiers */ int drmModeAddFB2WithModifiers(int fd, uint32_t width, uint32_t height, 			       uint32_t pixel_format, const uint32_t bo_handles[4], 			       const uint32_t pitches[4], const uint32_t offsets[4], 			       const uint64_t modifier[4], uint32_t *buf_id, 				   uint32_t flags); /**  * Destroies the given framebuffer.  */ extern int drmModeRmFB(int fd, uint32_t bufferId); /**  * Mark a region of a framebuffer as dirty.  */ extern int drmModeDirtyFB(int fd, uint32_t bufferId, 			  drmModeClipPtr clips, uint32_t num_clips); /*  * Crtc functions  */ /**  * Retrieve information about the ctrt crtcId  */ extern drmModeCrtcPtr drmModeGetCrtc(int fd, uint32_t crtcId); /**  * Set the mode on a crtc crtcId with the given mode modeId.  */ int drmModeSetCrtc(int fd, uint32_t crtcId, uint32_t bufferId,                    uint32_t x, uint32_t y, uint32_t *connectors, int count, 		   drmModeModeInfoPtr mode); /*  * Cursor functions  */ /**  * Set the cursor on crtc  */ int drmModeSetCursor(int fd, uint32_t crtcId, uint32_t bo_handle, uint32_t width, uint32_t height); int drmModeSetCursor2(int fd, uint32_t crtcId, uint32_t bo_handle, uint32_t width, uint32_t height, int32_t hot_x, int32_t hot_y); /**  * Move the cursor on crtc  */ int drmModeMoveCursor(int fd, uint32_t crtcId, int x, int y); /**  * Encoder functions  */ drmModeEncoderPtr drmModeGetEncoder(int fd, uint32_t encoder_id); /*  * Connector manipulation  */ /**  * Retrieve all information about the connector connectorId. This will do a  * forced probe on the connector to retrieve remote information such as EDIDs  * from the display device.  */ extern drmModeConnectorPtr drmModeGetConnector(int fd, 					       uint32_t connectorId); /**  * Retrieve current information, i.e the currently active mode and encoder,  * about the connector connectorId. This will not do any probing on the  * connector or remote device, and only reports what is currently known.  * For the complete set of modes and encoders associated with the connector  * use drmModeGetConnector() which will do a probe to determine any display  * link changes first.  */ extern drmModeConnectorPtr drmModeGetConnectorCurrent(int fd, 						      uint32_t connector_id); /**  * Attaches the given mode to an connector.  */ extern int drmModeAttachMode(int fd, uint32_t connectorId, drmModeModeInfoPtr mode_info); /**  * Detaches a mode from the connector  * must be unused, by the given mode.  */ extern int drmModeDetachMode(int fd, uint32_t connectorId, drmModeModeInfoPtr mode_info); extern drmModePropertyPtr drmModeGetProperty(int fd, uint32_t propertyId); extern void drmModeFreeProperty(drmModePropertyPtr ptr); extern drmModePropertyBlobPtr drmModeGetPropertyBlob(int fd, uint32_t blob_id); extern void drmModeFreePropertyBlob(drmModePropertyBlobPtr ptr); extern int drmModeConnectorSetProperty(int fd, uint32_t connector_id, uint32_t property_id, 				    uint64_t value); extern int drmCheckModesettingSupported(const char *busid); extern int drmModeCrtcSetGamma(int fd, uint32_t crtc_id, uint32_t size, 			       uint16_t *red, uint16_t *green, uint16_t *blue); extern int drmModeCrtcGetGamma(int fd, uint32_t crtc_id, uint32_t size, 			       uint16_t *red, uint16_t *green, uint16_t *blue); extern int drmModePageFlip(int fd, uint32_t crtc_id, uint32_t fb_id, 			   uint32_t flags, void *user_data); extern int drmModePageFlipTarget(int fd, uint32_t crtc_id, uint32_t fb_id, 				 uint32_t flags, void *user_data, 				 uint32_t target_vblank); extern drmModePlaneResPtr drmModeGetPlaneResources(int fd); extern drmModePlanePtr drmModeGetPlane(int fd, uint32_t plane_id); extern int drmModeSetPlane(int fd, uint32_t plane_id, uint32_t crtc_id, 			   uint32_t fb_id, uint32_t flags, 			   int32_t crtc_x, int32_t crtc_y, 			   uint32_t crtc_w, uint32_t crtc_h, 			   uint32_t src_x, uint32_t src_y, 			   uint32_t src_w, uint32_t src_h); extern drmModeObjectPropertiesPtr drmModeObjectGetProperties(int fd, 							uint32_t object_id, 							
+SDL_KMSDRM_LEGACY_SYM(union gbm_bo_handle,gbm_bo_get_handle,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(int,gbm_bo_write,(struct gbm_bo *bo, const void *buf, size_t count))
+SDL_KMSDRM_LEGACY_SYM(struct gbm_device *,gbm_bo_get_device,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(void,gbm_bo_set_user_data,(struct gbm_bo *bo, void *data,
+                                          void (*destroy_user_data)(struct gbm_bo *, void *)))
+SDL_KMSDRM_LEGACY_SYM(void *,gbm_bo_get_user_data,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(void,gbm_bo_destroy,(struct gbm_bo *bo))
+SDL_KMSDRM_LEGACY_SYM(struct gbm_bo *,gbm_bo_create,(struct gbm_device *gbm,
+                                              uint32_t width, uint32_t height,
+                                              uint32_t format, uint32_t usage))
+SDL_KMSDRM_LEGACY_SYM(struct gbm_surface *,gbm_surface_create,(struct gbm_device *gbm,
+                                                        uint32_t width, uint32_t height,
+                                                        uint32_t format, uint32_t flags))
+SDL_KMSDRM_LEGACY_SYM(void,gbm_surface_destroy,(struct gbm_surface *surf))
+SDL_KMSDRM_LEGACY_SYM(struct gbm_bo *,gbm_surface_lock_front_buffer,(struct gbm_surface *surf))
+SDL_KMSDRM_LEGACY_SYM(void,gbm_surface_release_buffer,(struct gbm_surface *surf, struct gbm_bo *bo))
+
+
+#undef SDL_KMSDRM_LEGACY_MODULE
+#undef SDL_KMSDRM_LEGACY_SYM
+#undef SDL_KMSDRM_LEGACY_SYM_CONST
+
+/* *INDENT-ON* */
+
+/* vi: set ts=4 sw=4 expandtab: */
