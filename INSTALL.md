@@ -37,9 +37,11 @@ Install the graphics driver binaries for the IT PowerVR SGX530 from rcn-ee.com, 
 This might take a long time. The system will reboot when it is complete.
 
 
-12. Launch a shell on the BBB and change directory to the repository again using 'cd SDL2-bbb-sgx'.
-13. Create a build directory using 'mkdir build && cd build'.
-14. Compile and install SDL2 into `/usr/local/`:
+12. Launch a shell on the BBB and change directory to the repository again, then create a build directory:
+
+`cd SDL2-bbb-sgx && mkdir build && cd build`
+
+13. Compile and install SDL2 into `/usr/local/`:
 
 `CFLAGS="-O3 -march=armv7-a -marm -mfpu=neon -mtune=cortex-a8" ../configure --enable-video-kmsdrm --disable-video-vulkan --disable-video-opengl --enable-video-opengles --disable-video-opengles1 --enable-video-opengles2 --disable-video-dummy --disable-video-x11 --disable-kmsdrm-shared; make; sudo make install`
 
