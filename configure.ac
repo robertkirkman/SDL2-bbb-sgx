@@ -2240,7 +2240,7 @@ AS_HELP_STRING([--enable-video-kmsdrm], [use KMSDRM video driver [[default=no]]]
         video_kmsdrm=no
 
         PKG_CHECK_MODULES([LIBDRM], [libdrm >= 1.4.82], libdrm_avail=yes, libdrm_avail=no)
-        PKG_CHECK_MODULES([LIBGBM], [gbm >= 11.1.0], libgbm_avail=yes, libgbm_avail=no)
+        PKG_CHECK_MODULES([LIBGBM], [gbm >= 2.0.0], libgbm_avail=yes, libgbm_avail=no)
 
         if test x$libdrm_avail = xyes -a x$libgbm_avail = xyes; then
             video_kmsdrm=yes
@@ -2252,7 +2252,7 @@ AS_HELP_STRING([--enable-kmsdrm-shared], [dynamically load kmsdrm support [[defa
                 , enable_kmsdrm_shared=yes)
 
             AC_DEFINE(SDL_VIDEO_DRIVER_KMSDRM, 1, [ ])
-            SOURCES="$SOURCES $srcdir/src/video/kmsdrm/*.c"
+            #SOURCES="$SOURCES $srcdir/src/video/kmsdrm/*.c"
             SOURCES="$SOURCES $srcdir/src/video/kmsdrm_legacy/*.c"
             EXTRA_CFLAGS="$EXTRA_CFLAGS $LIBDRM_CFLAGS $LIBGBM_CFLAGS"
 

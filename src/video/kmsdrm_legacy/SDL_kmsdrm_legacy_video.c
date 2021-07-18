@@ -48,6 +48,11 @@
 #include <poll.h>
 
 #define KMSDRM_LEGACY_DRI_PATH "/dev/dri/"
+/* 
+  Within my abilities, BeagleBone Black is not capable of detecting exactly which displays are 
+  connected, so the connector ID must be hardcoded. Please fix this if you know how to.
+  Connector ID 30 corresponds to the Micro HDMI port.
+*/
 #define CONN_ID 30
 
 static int
