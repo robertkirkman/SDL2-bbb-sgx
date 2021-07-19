@@ -1,5 +1,3 @@
-
-
 # Compiling and Installing SDL2-bbb-sgx
 #### GNU/Linux on the BeagleBone Black WITHOUT cross-compilation:
 1. Download the official 2020-04-06 compressed image of Debian 10 for the BeagleBone Black from [beagleboard.org](https://debian.beagleboard.org/images/bone-debian-10.3-iot-armhf-2020-04-06-4gb.img.xz).
@@ -29,7 +27,7 @@ For example:
 
 `git clone https://github.com/robertkirkman/SDL2-bbb-sgx.git && cd SDL2-bbb-sgx`
 
-11. **WARNING: The following step will downgrade your system to kernel 4.14 and create a FrankenDebian. The graphics driver is unmaintained - if you know a better solution that works, for example if you know how to use [openpvrsgx](https://github.com/openpvrsgx-devgroup/linux_openpvrsgx), please contact me on Discord at magi#5813.**
+11. **WARNING: The following step will downgrade your system to kernel 4.14 and create a [FrankenDebian](https://wiki.debian.org/DontBreakDebian). The graphics driver is unmaintained - if you know a better solution that works, for example if you know how to use [openpvrsgx](https://github.com/openpvrsgx-devgroup/linux_openpvrsgx), please contact me on Discord at magi#5813.**
 Install the graphics driver binaries for the IT PowerVR SGX530 from rcn-ee.com, the official beagleboard repository, by running the installation script as root:
 
 `sudo ./install-sgx.sh`
@@ -45,7 +43,7 @@ This might take a long time. The system will reboot when it is complete.
 
 `CFLAGS="-O3 -march=armv7-a -marm -mfpu=neon -mtune=cortex-a8" ../configure --enable-video-kmsdrm --disable-video-vulkan --disable-video-opengl --enable-video-opengles --disable-video-opengles1 --enable-video-opengles2 --disable-video-dummy --disable-video-x11 --disable-kmsdrm-shared; make; sudo make install`
 
-- Note: Attempting to install or use Xorg or Wayland alongside SDL2 in this environment is completely unsupported. Please feel free to tinker, but remember to load a clean image and follow these steps again if you break the installation.
+- Note: Attempting to install or use Xorg or Wayland alongside SDL2 in this environment is completely unsupported. Please feel free to tinker, but remember to load a clean image and follow these steps again if you break the installation. In this FrankenDebian, `apt` might allow you to install certain packages that *will* break SDL2-bbb-sgx, so be aware of this when installing other software.
 
 #### GNU/Linux on the BeagleBone Black WITH cross-compilation:
 * TODO
