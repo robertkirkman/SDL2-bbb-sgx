@@ -7,7 +7,8 @@
 5. Obtain an internet connection by connecting over ethernet, sharing your workstation's connection over USB, or installing a wireless network adapter and connecting to a wireless network.
 6. Configure your preferred DNS address using 
 
-`sudo echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf && sudo chattr +i /etc/resolv.conf`
+`sudo echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf`
+`sudo chattr +i /etc/resolv.conf`
 
 8. Set the system time zone:
 
