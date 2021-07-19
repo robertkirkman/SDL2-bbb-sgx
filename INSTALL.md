@@ -8,6 +8,7 @@
 6. Configure your preferred DNS address using 
 
 `sudo echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf`
+
 `sudo chattr +i /etc/resolv.conf`
 
 8. Set the system time zone:
