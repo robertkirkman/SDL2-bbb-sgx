@@ -5,7 +5,9 @@
 3. An HDMI monitor and male Micro HDMI to male HDMI cable are required to view SDL demos and applications. Connect these to the BBB.
 4. Either connect a USB keyboard or use ssh to log in to the BBB and launch a shell.
 5. Obtain an internet connection by connecting over ethernet, sharing your workstation's connection over USB, or installing a wireless network adapter and connecting to a wireless network.
-6. Configure your preferred DNS address using 
+6. Configure your preferred DNS address, changing 1.1.1.1 to your desired address:
+
+`sudo rm -rf /etc/resolv.conf`
 
 `sudo echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf`
 
