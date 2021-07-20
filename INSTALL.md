@@ -31,7 +31,7 @@ For example:
 
 `git clone https://github.com/robertkirkman/SDL2-bbb-sgx.git && cd SDL2-bbb-sgx`
 
-11. **WARNING: The following step will downgrade your system to kernel 4.14 and create a [FrankenDebian](https://wiki.debian.org/DontBreakDebian). The graphics driver is unmaintained - if you know a better solution that works, for example if you know how to use [openpvrsgx](https://github.com/openpvrsgx-devgroup/linux_openpvrsgx), please contact me on Discord at magi#5813.**
+11. **WARNING: The following step will downgrade your system to kernel 4.14, add the default user to the `input` group, and create a [FrankenDebian](https://wiki.debian.org/DontBreakDebian). The graphics driver is unmaintained - if you know a better solution that works, for example if you know how to use [openpvrsgx](https://github.com/openpvrsgx-devgroup/linux_openpvrsgx), please contact me on Discord at magi#5813.**
 Install the graphics driver binaries for the IT PowerVR SGX530 from rcn-ee.com, the official beagleboard repository, by running the installation script as root:
 
 `sudo ./install-sgx.sh`
