@@ -45,7 +45,7 @@ This might take a long time. The system will reboot when it is complete.
 
 13. Compile and install SDL2 into `/usr/local/`:
 
-`CFLAGS="-O3 -march=armv7-a -marm -mfpu=neon -mtune=cortex-a8" ../configure --enable-video-kmsdrm --disable-video-vulkan --disable-video-opengl --enable-video-opengles --disable-video-opengles1 --enable-video-opengles2 --disable-video-dummy --disable-video-x11 --disable-kmsdrm-shared; make; sudo make install`
+`CFLAGS="-O3 -march=armv7-a -marm -mfpu=neon -mtune=cortex-a8" ../configure --enable-video-kmsdrm --disable-video-vulkan --disable-video-opengl --enable-video-opengles --disable-video-opengles1 --enable-video-opengles2 --disable-video-dummy --disable-video-x11 --disable-kmsdrm-shared --enable-alsa --disable-alsa-shared --disable-pulseaudio --disable-diskaudio --disable-dummyaudio --disable-oss; make; sudo make install`
 
 - Note: Attempting to install or use Xorg or Wayland alongside SDL2 in this environment is completely unsupported. Please feel free to tinker, but remember to load a clean image and follow these steps again if you break the installation. In this FrankenDebian, `apt` might allow you to install certain packages that *will* break SDL2-bbb-sgx, so be aware of this when installing other software.
 
