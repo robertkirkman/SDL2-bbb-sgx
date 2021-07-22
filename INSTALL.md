@@ -49,5 +49,10 @@ This might take a long time. The system will reboot when it is complete.
 
 - Note: Attempting to install or use Xorg or Wayland alongside SDL2 in this environment is completely unsupported. Please feel free to tinker, but remember to load a clean image and follow these steps again if you break the installation. In this FrankenDebian, `apt` might allow you to install certain packages that *will* break SDL2-bbb-sgx, so be aware of this when installing other software.
 
+- OPTIONAL: the default image has two services enabled by default that are not necessarily required for developing SDL2 applications with the BBB, but are still running and can have a minor resource impact on system memory. *If* you desire to maximize run-time performance of resource-intensive SDL2 applications, you might consider disabling these services, which provide a web server that hosts development tools for BoneScript (a JavaScript library for BeagleBone). Should you need this feature alongside SDL2 in the future, you can simply re-enable these services.
+
+`sudo systemctl disable --now bonescript-autorun.service`
+`sudo systemctl disable --now nginx.service`
+
 #### GNU/Linux on the BeagleBone Black WITH cross-compilation:
 * TODO
