@@ -48,12 +48,11 @@
 #include <poll.h>
 
 #define KMSDRM_LEGACY_DRI_PATH "/dev/dri/"
-/* 
-  Within my abilities, BeagleBone Black is not capable of detecting exactly which displays are 
-  connected, so the connector ID must be hardcoded. Please fix this if you know how to.
-  Connector ID 30 corresponds to the Micro HDMI port.
+/*
+  FIXME
+  Connector ID 34 corresponds to the Micro HDMI port.
 */
-#define CONN_ID 30
+/*#define CONN_ID 34*/
 
 static int
 check_modestting(int devindex)
@@ -72,12 +71,12 @@ check_modestting(int devindex)
                 SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "%scard%d connector, encoder and CRTC counts are: %d %d %d",
                              KMSDRM_LEGACY_DRI_PATH, devindex,
                              resources->count_connectors, resources->count_encoders, resources->count_crtcs);
-                /* 
-                   Device index must be 1 to access the IT PVR SGX 530 OpenGL ES accelerator - /dev/dri/card0 
-                   and /dev/dri/card2 may exist and pass these other checks, but they will not work.
-                */  
+                /*
+                   FIXME
+                   Device index must be 0 to access the IT PVR SGX 530 OpenGL ES accelerator.
+                */
                 if (resources->count_connectors > 0 && resources->count_encoders > 0 && resources->count_crtcs > 0 &&
-                   devindex == 1) {
+                   devindex == 0) {
                     available = SDL_TRUE;
                 }
                 KMSDRM_LEGACY_drmModeFreeResources(resources);
@@ -403,7 +402,7 @@ KMSDRM_LEGACY_CreateSurfaces(_THIS, SDL_Window * window)
     SDL_DisplayData *dispdata = (SDL_DisplayData *) SDL_GetDisplayForWindow(window)->driverdata;
     Uint32 width = dispdata->mode.hdisplay;
     Uint32 height = dispdata->mode.vdisplay;
-    /* IT PVR SGX 530 Driver for BeagleBone Black only supports GBM pixel format RGB565. */
+    /* IT PowerVR SGX530 Driver for BeagleBone Black only supports GBM pixel format RGB565. */
     Uint32 surface_fmt = GBM_FORMAT_RGB565;
     Uint32 surface_flags = GBM_BO_USE_SCANOUT | GBM_BO_USE_RENDERING;
 #if SDL_VIDEO_OPENGL_EGL
@@ -493,11 +492,10 @@ KMSDRM_LEGACY_VideoInit(_THIS)
         if (!conn) {
             continue;
         }
-        /* 
-           Within my abilities, BeagleBone Black is not capable of detecting exactly which displays are  
-           connected, so the connector ID must be hardcoded. Please fix this if you know how to.
+        /*
+           FIXME
         */
-        if (conn->connection == DRM_MODE_CONNECTED && conn->count_modes && conn->connector_id == CONN_ID) {
+        if (conn->connection == DRM_MODE_CONNECTED && conn->count_modes) {
             SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Found connector %d with %d modes.",
                          conn->connector_id, conn->count_modes);
             dispdata->conn = conn;
