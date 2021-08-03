@@ -10,7 +10,7 @@ read INSTALL.md in this repository:
 https://github.com/robertkirkman/SDL2-bbb-sgx/blob/main/INSTALL.md
 
 Contributions to SDL2-bbb-sgx and credits to upstream developers:
-Huge thanks to zmatt on #beagle at chat.freenode.net, to vanfanel the REAL
+Huge thanks to zmatt on #beagle at irc.libera.chat, to vanfanel the REAL
 SDL developer, to Rob Clark, Remi Avignon, Robert Nelson the rcn-ee.com
 maintainer, and to all the developers at Texas Instruments and 
 Imagination Technologies, without whom this project would not be possible.
