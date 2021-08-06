@@ -53,6 +53,8 @@
   Connector ID 34 corresponds to the Micro HDMI port.
 */
 /*#define CONN_ID 34*/
+#define FIXED_WIDTH 320
+#define FIXED_HEIGHT 240
 
 static int
 check_modestting(int devindex)
@@ -720,7 +722,7 @@ KMSDRM_LEGACY_GetDisplayModes(_THIS, SDL_VideoDisplay * display)
         mode.w = conn->modes[i].hdisplay;
         mode.h = conn->modes[i].vdisplay;
         mode.refresh_rate = conn->modes[i].vrefresh;
-        /* IT PVR SGX 530 Driver for BeagleBone Black currently only supports 
+        /* IT PVR SGX 530 Driver for BeagleBone Black currently only supports
            GBM pixel format RGB565. */
         mode.format = SDL_PIXELFORMAT_RGB565;
         mode.driverdata = modedata;
@@ -761,7 +763,7 @@ KMSDRM_LEGACY_SetDisplayMode(_THIS, SDL_VideoDisplay * display, SDL_DisplayMode 
 #endif
 
         /* Tell app about the resize */
-        SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, mode->w, mode->h);
+        /*SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, mode->w, mode->h);*/
     }
 
     return 0;
@@ -772,7 +774,7 @@ KMSDRM_LEGACY_CreateWindow(_THIS, SDL_Window * window)
 {
     SDL_VideoData *viddata = (SDL_VideoData *)_this->driverdata;
     SDL_WindowData *windata;
-    SDL_VideoDisplay *display;
+    /*SDL_VideoDisplay *display;*/
 
 #if SDL_VIDEO_OPENGL_EGL
     if (!_this->egl_data) {
@@ -791,12 +793,14 @@ KMSDRM_LEGACY_CreateWindow(_THIS, SDL_Window * window)
     }
 
     /* Windows have one size for now */
-    display = SDL_GetDisplayForWindow(window);
+    /*display = SDL_GetDisplayForWindow(window);
     window->w = display->desktop_mode.w;
-    window->h = display->desktop_mode.h;
+    window->h = display->desktop_mode.h;*/
+    window->w = FIXED_WIDTH;
+    window->h = FIXED_HEIGHT;
 
     /* Maybe you didn't ask for a fullscreen OpenGL window, but that's what you get */
-    window->flags |= (SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
+    window->flags |= (SDL_WINDOW_OPENGL);
 
     /* In case we want low-latency, double-buffer video, we take note here */
     windata->double_buffer = SDL_FALSE;
