@@ -1,3 +1,5 @@
+THIS REPOSITORY IS OBSOLETE - replaced by https://github.com/robertkirkman/sm64ex-bbb-doc
+
 This is a fork of Simple DirectMedia Layer 2.0 modified to support 
 OpenGL ES 2.0 hardware 3D acceleration on the Texas Instruments 
 BeagleBone Black via its Imagination Technologies PowerVR SGX530 GPU. 
